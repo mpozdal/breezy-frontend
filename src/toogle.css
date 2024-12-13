@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.react-toggle--checked .react-toggle-track {
+	@apply bg-dark-background;
+}
+
+.react-toggle--checked:hover .react-toggle-track:hover {
+	@apply bg-dark-background;
+}
+
+.react-toggle .react-toggle-track:hover {
+	@apply bg-gray-900; /* Kolor kciuka na hover (ciemniejszy) */
+}
