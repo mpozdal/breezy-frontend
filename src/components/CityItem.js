@@ -1,7 +1,7 @@
 import React from 'react';
-
-function CityItem({ data }) {
-	console.log(data);
+import { useCities } from '../contexts/CitiesContext';
+function CityItem({ data, empty }) {
+	const { removeFavCities } = useCities();
 	return (
 		<div
 			class="h-[100px] flex flex-row items-center justify-between bg-light-panels dark:bg-dark-panels text-light-text 
@@ -23,8 +23,8 @@ function CityItem({ data }) {
 			</div>
 			<div className="flex flex-row items-center gap-4">
 				{/* <h3 className="text-6xl font-bold">32°</h3> */}
-				<button>
-					<i class="fa-regular fa-star text-xl"></i>
+				<button onClick={() => removeFavCities(data)}>
+					<i class="fa-solid fa-x text-xl"></i>
 				</button>
 			</div>
 		</div>

@@ -54,7 +54,7 @@ function CustomInput({ placeholder }) {
 							onClick={() => {
 								handleSelectCity(item);
 							}}
-							className="h-[50px] w-full flex items-center hover:bg-dark-background hover:dark:bg-light-background hover:text-dark-text hover:dark:text-light-text"
+							className="h-[50px] px-4 w-full flex items-center hover:bg-dark-background hover:dark:bg-light-background hover:text-dark-text hover:dark:text-light-text"
 						>
 							<div className=" ">{item.description}</div>
 						</button>

@@ -5,23 +5,38 @@ const CitiesContext = createContext();
 export const useCities = () => useContext(CitiesContext);
 
 export const CitiesProvider = ({ children }) => {
-	const [favCities, setFavCities] = useState([]);
-
-	useEffect(() => {
-		const cities = JSON.parse(localStorage.getItem('cities'));
-		console.log(JSON.parse(localStorage.getItem('cities')));
-		if (cities?.length > 0) setFavCities(cities);
+	const [favCities, setFavCities] = useState(() => {
+		const savedItems = localStorage.getItem('cities');
+		return savedItems ? JSON.parse(savedItems) : [];
 	});
+	useEffect(() => {}, [favCities]);
 
 	const addFavCities = (item) => {
-		setFavCities((prevItems) => [...prevItems, item]);
-		localStorage.setItem('cities', JSON.stringify(favCities));
+		if (!favCities.includes(item)) {
+			const updatedItems = [...favCities, item];
+			setFavCities(updatedItems);
+			updateLocalStorage(updatedItems);
+		}
+	};
+	const refreshCities = () => {
+		setFavCities(() => {
+			const savedItems = localStorage.getItem('cities');
+			return savedItems ? JSON.parse(savedItems) : [];
+		});
 	};
 	const removeFavCities = (item) => {
-		const idx = favCities.indexOf(item);
+		const temp = favCities;
+		const idx = temp.indexOf(item);
 		if (idx > -1) {
-			setFavCities((prevItems) => prevItems.splice(idx, 1));
+			temp.splice(idx, 1);
+			updateLocalStorage(temp);
+			setFavCities(temp);
 		}
+		refreshCities();
+	};
+
+	const updateLocalStorage = (item) => {
+		localStorage.setItem('cities', JSON.stringify(item));
 	};
 
 	return (
