@@ -1,29 +1,31 @@
 import React from 'react';
-
+import { useWeather } from '../contexts/WeatherContext';
 function Forecast() {
+	const { weatherData } = useWeather();
+	console.log(weatherData);
 	return (
-		<div className="bg-light-panels dark:bg-dark-panels text-light-text dark:text-white p-4  row-span-3 mr-4">
+		<div
+			className="bg-light-panels dark:bg-dark-panels text-light-text dark:text-white p-4 
+		 row-span-3 mr-4 w-full h-full grid grid-rows-[10px_1fr_1fr_1fr_1fr_1fr_1fr_1fr] gap-4"
+		>
 			<h3 className="text-lg font-medium ">7-DAY FORECAST</h3>
-			<div className=" w-full h-full grid grid-rows-7 gap-4">
-				<div className=" w-full flex-row gap-4 flex justify-between items-center ">
-					<div className="text-md font-medium text-light-alt-text dark:text-dark-alt-text">
-						13.12
+			{weatherData?.map((day, index) => (
+				<div
+					className=" b w-full grid grid-cols-[1fr_15px_1fr_1fr] gap-4  justify-between items-center text-left"
+					key={index}
+				>
+					<div className="text-md font-medium text-left text-light-alt-text dark:text-dark-alt-text">
+						{day?.time}
 					</div>
-					<i className="fa-solid fa-sun text-3xl"></i>
+					{/* <i className="fa-solid fa-sun text-3xl"></i> */}
+					<div className="text-center">{day?.weathercode}</div>
 
-					<div className="text-2xl">36/22°</div>
-					<div className="text-sm">2.2 kWh</div>
-				</div>
-				<div className=" w-full flex-row gap-4 flex justify-between items-center ">
-					<div className="text-md font-medium text-light-alt-text dark:text-dark-alt-text">
-						13.12
+					<div className="text-2xl text-right">
+						{day?.temperature_2m_max}/{day?.temperature_2m_min}°
 					</div>
-					<i className="fa-solid fa-sun text-3xl"></i>
-
-					<div className="text-2xl">36/22°</div>
-					<div className="text-sm">2.2 kWh</div>
+					<div className="text-sm text-right">{day?.energy} kWh</div>
 				</div>
-			</div>
+			))}
 		</div>
 	);
 }

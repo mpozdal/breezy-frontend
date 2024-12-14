@@ -10,7 +10,6 @@ export const DarkModeProvider = ({ children }) => {
 	useEffect(() => {
 		const savedMode = localStorage.getItem('darkMode') === 'true';
 		setDarkMode(savedMode);
-		console.log('abcd');
 	});
 
 	const toggleDarkMode = () => {
