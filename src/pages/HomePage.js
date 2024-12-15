@@ -12,11 +12,11 @@ function HomePage() {
 
 	return (
 		<div className={`${darkMode ? 'dark' : ''} `}>
-			<div className="flex h-[100dvh] bg-light-background dark:bg-dark-background text-white p-4">
+			<div className="flex h-[100dvh] bg-light-background dark:bg-dark-background text-white p-2 md:p-4">
 				<Nav />
 
 				{isLoading || isGettingLocation ? (
-					<div className="grid w-full grid-cols-1 grid-rows-[50px_1fr] h-full gap-4 ml-4">
+					<div className="grid w-full grid-cols-1 grid-rows-[50px_1fr] h-full gap-2 ml-2 md:gap-4 md:ml-4">
 						<CustomInput placeholder="Search for cities" />
 						<div className="flex justify-center items-center text-8xl">
 							<ThreeDot
@@ -26,7 +26,7 @@ function HomePage() {
 						</div>
 					</div>
 				) : (
-					<div className="overflow-y-auto grid w-full grid-cols-1 md:grid-cols-[3fr_4fr] md:grid-rows-[50px_1fr_1fr] h-full gap-4 ml-4">
+					<div className="overflow-y-auto grid w-full grid-cols-1 md:grid-cols-[3fr_4fr] md:grid-rows-[50px_1fr_1fr] h-full gap-2 md:gap-4 ml-2 md:ml-4">
 						<CustomInput placeholder="Search for cities" />
 						<Forecast />
 

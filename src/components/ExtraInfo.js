@@ -37,7 +37,7 @@ function ExtraInfo() {
 						{(weeklyInfo?.avg_sunshine_time / 3600).toFixed(2)}h
 					</span>
 				</div>
-				<div className="col-span-2 text-justify font-medium text-sm self-end">
+				<div className="col-span-2 text-justify font-bold text-sm self-end">
 					{weeklyInfo?.desc || 'none'}
 				</div>
 			</div>

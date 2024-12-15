@@ -39,7 +39,7 @@ function CustomInput({ placeholder, fav }) {
 		clearInput();
 	};
 	return (
-		<div className="order-0 md:col-span-2 relative">
+		<div className="order-0 md:col-span-1 relative ">
 			<div className=" flex justify-center items-center bg-light-panels dark:bg-dark-panels border-light-text border-b-2">
 				<input
 					value={input}
@@ -53,7 +53,7 @@ function CustomInput({ placeholder, fav }) {
 						className="p-4 hover:text-light-text hover:dark:text-dark-text text-light-alt-text dark:text-dark-alt-text"
 						onClick={getLocation}
 					>
-						<i className="fa-solid fa-crosshairs"></i>
+						<i className="fa-solid fa-crosshairs text-xl"></i>
 					</button>
 				)}
 			</div>

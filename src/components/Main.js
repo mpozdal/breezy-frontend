@@ -22,13 +22,13 @@ function Main() {
 	};
 
 	return (
-		<div className="order-1 md:order-2 flex flex-row  w-full text-light-text dark:text-white relative">
+		<div className="order-1 md:order-2 flex flex-row  w-full text-light-text dark:text-white relative p-4">
 			<div className="text-xl md:text-3xl w-2/3 font-bold  flex flex-col h-full gap-5 md:gap-0  justify-around">
 				<h3 className="flex items-start ">
 					{city || 'Unkown city, Country'}
 					{city && (
 						<button
-							className="flex justify-center absolute right-0 top-0 md:top-2"
+							className="flex justify-center absolute right-0 top-0 md:top-2 hover:text-light-alt-text dark:hover:text-dark-alt-text"
 							onClick={() => {
 								if (
 									favCities.some(

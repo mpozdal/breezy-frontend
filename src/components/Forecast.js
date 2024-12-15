@@ -10,8 +10,9 @@ function Forecast() {
 
 	return (
 		<div
-			className="order-2 md:order-3 bg-light-panels dark:bg-dark-panels text-light-text dark:text-white p-4 
-		 row-span-2  w-full h-full grid grid-rows-[20px_1fr_1fr_1fr_1fr_1fr_1fr_1fr] md:grid-rows-[1fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr] gap-4 relative"
+			className="order-2 md:order-1 bg-light-panels dark:bg-dark-panels text-light-text dark:text-white 
+			p-4  
+		 	row-span-3  w-full h-full grid grid-rows-[30px_1fr_1fr_1fr_1fr_1fr_1fr_1fr] md:grid-rows-[1fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr] relative"
 		>
 			<div className="flex flex-row w-full justify-between items-center">
 				<h3 className="text-lg font-medium ">7-DAY FORECAST</h3>
