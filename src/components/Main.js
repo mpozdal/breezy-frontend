@@ -16,32 +16,35 @@ function Main() {
 	const checkFav = () => {
 		const exists = favCities.some((city) => city.city === cityData.city);
 		if (exists) {
-			return <i class="fa-solid fa-star text-2xl "></i>;
+			return <i className="fa-solid fa-star text-2xl "></i>;
 		}
-		return <i class="fa-regular fa-star text-2xl "></i>;
+		return <i className="fa-regular fa-star text-2xl "></i>;
 	};
 
 	return (
 		<div className="flex flex-row  w-full text-light-text dark:text-white relative">
 			<div className="text-3xl w-2/3 font-bold  flex flex-col h-full   justify-around">
 				<h3 className="flex items-center ">
-					{city}
-					<button
-						onClick={() => {
-							if (
-								favCities.some(
-									(city) => city.city === cityData.city
-								)
-							) {
-								removeFavCities(cityData);
-							} else addFavCities(cityData);
-						}}
-					>
-						&nbsp; {checkFav()}
-					</button>
+					{city || 'Unkown city, Country'}
+					{city && (
+						<button
+							className=" flex justify-start item-center p-4"
+							onClick={() => {
+								if (
+									favCities.some(
+										(city) => city.city === cityData.city
+									)
+								) {
+									removeFavCities(cityData);
+								} else addFavCities(cityData);
+							}}
+						>
+							{checkFav()}
+						</button>
+					)}
 				</h3>
 				<div className="text-8xl font-bold ">
-					{currentWeather?.current?.temperature_2m}°
+					{currentWeather?.current?.temperature_2m || 0}°
 				</div>
 			</div>
 			<div className="text-4xl font-bold flex h-full  justify-center  items-center w-1/3">

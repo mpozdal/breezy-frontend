@@ -10,7 +10,7 @@ function ExtraInfo() {
 						Max temp
 					</span>
 					<span className="text-3xl">
-						{weeklyInfo?.max_week_temp}°
+						{weeklyInfo?.max_week_temp || 0}°
 					</span>
 				</div>
 				<div className="text-right flex flex-col">
@@ -18,7 +18,7 @@ function ExtraInfo() {
 						Min temp
 					</span>
 					<span className="text-3xl">
-						{weeklyInfo?.min_week_temp}°
+						{weeklyInfo?.min_week_temp || 0}°
 					</span>
 				</div>
 				<div className="text-left flex flex-col">
@@ -26,7 +26,7 @@ function ExtraInfo() {
 						Avg pressure
 					</span>
 					<span className="text-3xl">
-						{weeklyInfo?.avg_pressure || 997} hPa
+						{weeklyInfo?.avg_pressure || 0} hPa
 					</span>
 				</div>
 				<div className="text-right flex flex-col">
@@ -39,8 +39,7 @@ function ExtraInfo() {
 				</div>
 				<div className="col-span-2 text-justify font-medium text-sm self-end">
 					<span className="font-bold">Desc: </span>
-					{weeklyInfo?.desc ||
-						'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'}
+					{weeklyInfo?.desc || 'none'}
 				</div>
 			</div>
 		</div>

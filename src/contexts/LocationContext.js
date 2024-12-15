@@ -1,10 +1,12 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import { fetchCoords } from '../backend';
+import { useError } from './ErrorContext';
 export const LocationContext = createContext();
 
 export const useLocation = () => useContext(LocationContext);
 
 export const LocationProvider = ({ children }) => {
+	const { isGettingLocation, setIsGettingLocation } = useError();
 	const [location, setLocation] = useState({
 		lat: null,
 		lng: null,
@@ -13,7 +15,15 @@ export const LocationProvider = ({ children }) => {
 	const [error, setError] = useState(null);
 
 	useEffect(() => {
-		getLocation();
+		if (!JSON.parse(localStorage.getItem('location'))) {
+			getLocation();
+		} else {
+			const data = JSON.parse(localStorage.getItem('location'));
+			setLocation({
+				lat: data.lat,
+				lng: data.lng,
+			});
+		}
 	}, []);
 
 	const handleSetLocationFromFav = (data) => {
@@ -47,36 +57,43 @@ export const LocationProvider = ({ children }) => {
 	};
 
 	const getLocation = () => {
-		if ('geolocation' in navigator) {
-			navigator.geolocation.getCurrentPosition(
-				(position) => {
-					setLocation({
-						lat: position.coords.latitude,
-						lng: position.coords.longitude,
-					});
-
-					localStorage.setItem(
-						'location',
-						JSON.stringify({
+		setIsGettingLocation(true);
+		try {
+			if ('geolocation' in navigator) {
+				navigator.geolocation.getCurrentPosition(
+					(position) => {
+						setLocation({
 							lat: position.coords.latitude,
 							lng: position.coords.longitude,
-						})
-					);
-				},
-				(err) => {
-					setError(err.message);
-					setLocation({
-						lat: 40.73061,
-						lng: -73.935242,
-					}); //default new york
-				}
-			);
-		} else {
-			setError('Geolocation is not supported by your browser.');
-			setLocation({
-				lat: 40.73061,
-				lng: -73.935242,
-			});
+						});
+
+						localStorage.setItem(
+							'location',
+							JSON.stringify({
+								lat: position.coords.latitude,
+								lng: position.coords.longitude,
+							})
+						);
+					},
+					(err) => {
+						setError(err.message);
+						setLocation({
+							lat: 40.73061,
+							lng: -73.935242,
+						}); //default new york
+					}
+				);
+			} else {
+				setError('Geolocation is not supported by your browser.');
+				setLocation({
+					lat: 40.73061,
+					lng: -73.935242,
+				});
+			}
+		} catch (err) {
+			setError(err);
+		} finally {
+			setIsGettingLocation(false);
 		}
 	};
 

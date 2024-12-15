@@ -50,7 +50,7 @@ function CustomInput({ placeholder, fav }) {
 				/>
 				{!fav && (
 					<button
-						className="p-4 hover:text-dark-text text-light-alt-text dark:text-dark-alt-text"
+						className="p-4 hover:text-light-text hover:dark:text-dark-text text-light-alt-text dark:text-dark-alt-text"
 						onClick={getLocation}
 					>
 						<i className="fa-solid fa-crosshairs"></i>
@@ -59,7 +59,7 @@ function CustomInput({ placeholder, fav }) {
 			</div>
 			<div className="absolute top-100 bg-light-background dark:bg-dark-background text-light-text dark:text-dark-text w-full z-10">
 				{cities.length > 0 &&
-					cities.map((item) => (
+					cities?.map((item) => (
 						<button
 							onClick={() => {
 								fav ? addFavCity(item) : handleSelectCity(item);

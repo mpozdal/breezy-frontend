@@ -14,13 +14,13 @@ function Nav() {
 					<i className="fa-solid fa-wind"></i>Breezy
 				</NavLink>
 			</span>
-			<ul className="text-center text-light-alt-text dark:text-dark-alt-text">
+			<ul className="text-center text-light-alt-text font-bold dark:text-dark-text">
 				<li className="mb-4 ">
 					<NavLink
 						to="/"
 						className={({ isActive }) =>
 							isActive
-								? 'flex flex-col font-bold text-light-text dark:text-dark-text'
+								? 'flex flex-col font-bold text-light-text dark:text-dark-alt-text'
 								: 'flex flex-col'
 						}
 					>

@@ -52,11 +52,13 @@ export const fetchWeatherForecast = async (location) => {
 				err.message || 'Something went wrong while fetching data'
 			);
 		}
+	} else {
+		throw new Error('Something went wrong while fetching data');
 	}
 };
 export const fetchWeeklyInfo = async (location) => {
-	const latitude = location.lat;
-	const longitude = location.lng;
+	const latitude = location?.lat;
+	const longitude = location?.lng;
 	if (latitude !== null && longitude !== null) {
 		try {
 			const response = await axios.get('/api/weather/weeklyInfo', {
@@ -72,11 +74,13 @@ export const fetchWeeklyInfo = async (location) => {
 				err.message || 'Something went wrong while fetching data'
 			);
 		}
+	} else {
+		throw new Error('Something went wrong while fetching data');
 	}
 };
 export const fetchCurrentInfo = async (location) => {
-	const latitude = location.lat;
-	const longitude = location.lng;
+	const latitude = location?.lat;
+	const longitude = location?.lng;
 	if (latitude !== null && longitude !== null) {
 		try {
 			const response = await axios.get('/api/weather/current', {
@@ -91,12 +95,14 @@ export const fetchCurrentInfo = async (location) => {
 				err.message || 'Something went wrong while fetching data'
 			);
 		}
+	} else {
+		throw new Error('Something went wrong while fetching data');
 	}
 };
 
 export const fetchCityName = async (location) => {
-	const latitude = location.lat;
-	const longitude = location.lng;
+	const latitude = location?.lat;
+	const longitude = location?.lng;
 	if (latitude !== null && longitude !== null) {
 		try {
 			const response = await axios.get('/api/city/name', {
@@ -107,10 +113,11 @@ export const fetchCityName = async (location) => {
 			}
 			return response;
 		} catch (err) {
-			console.log('Error with fetch city name!' + err);
 			throw new Error(
 				err.message || 'Something went wrong while fetching data'
 			);
 		}
+	} else {
+		throw new Error('Something went wrong while fetching data');
 	}
 };

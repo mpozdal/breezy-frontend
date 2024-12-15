@@ -1,15 +1,17 @@
 import React from 'react';
 import { useWeather } from '../contexts/WeatherContext';
 import WeatherIcon from './WeatherIcon';
+import ErrorStatus from './ErrorStatus';
 function Forecast() {
 	const { weatherData } = useWeather();
+
 	return (
 		<div
 			className=" bg-light-panels dark:bg-dark-panels text-light-text dark:text-white p-4 
-		 row-span-3  w-full h-full grid grid-rows-[1fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr] gap-4"
+		 row-span-3  w-full h-full grid grid-rows-[1fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr] gap-4 relative"
 		>
 			<h3 className="text-lg font-medium ">7-DAY FORECAST</h3>
-			{weatherData !== null &&
+			{weatherData !== null ? (
 				weatherData?.map((day, index) => (
 					<div
 						className=" w-full grid grid-cols-[1fr_40px_2fr_1fr] gap-4  justify-between items-center text-left"
@@ -27,11 +29,19 @@ function Forecast() {
 							{day?.temperature_2m_max} /{day?.temperature_2m_min}
 							°
 						</div>
-						<div className="text-sm text-right">
-							{day?.energy} kWh
+						<div className="text-sm text-right ">
+							<div>{day?.energy}</div>
+							<div>kWh</div>
 						</div>
 					</div>
-				))}
+				))
+			) : (
+				<div className="row-span-7 flex-col flex justify-center items-center">
+					<i className="fa-solid fa-triangle-exclamation text-8xl"></i>
+					Problem with fetching data
+				</div>
+			)}
+			<ErrorStatus />
 		</div>
 	);
 }

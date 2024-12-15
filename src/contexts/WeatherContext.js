@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import { useLocation } from './LocationContext';
-import { useError } from '../contexts/ErrorContext';
+import { useError } from './ErrorContext';
 import {
 	fetchWeeklyInfo,
 	fetchWeatherForecast,
@@ -12,13 +12,13 @@ export const WeatherContext = createContext();
 export const useWeather = () => useContext(WeatherContext);
 
 export const WeatherProvider = ({ children }) => {
+	const { isLoading, setIsLoading } = useError();
 	const [weatherData, setWeatherData] = useState(null);
 	const [weeklyInfo, setWeeklyInfo] = useState(null);
 	const [city, setCity] = useState(null);
 	const [currentWeather, setCurrentWeather] = useState(null);
 	const { location } = useLocation();
 	const { setError } = useError();
-	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
 		if (location?.lng && location?.lat) {

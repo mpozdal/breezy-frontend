@@ -1,13 +1,14 @@
-import { DarkModeProvider } from './contexts/DarkModeContext';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 import CitiesPage from './pages/CitiesPage';
 import HomePage from './pages/HomePage';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import MapPage from './pages/MapPage';
+
+import { DarkModeProvider } from './contexts/DarkModeContext';
 import { LocationProvider } from './contexts/LocationContext';
 import { WeatherProvider } from './contexts/WeatherContext';
 import { CitiesProvider } from './contexts/CitiesContext';
 import { ErrorProvider } from './contexts/ErrorContext';
-import ErrorStatus from './components/ErrorStatus';
 
 function App() {
 	return (
@@ -17,7 +18,6 @@ function App() {
 					<CitiesProvider>
 						<DarkModeProvider>
 							<Router>
-								<ErrorStatus />
 								<Routes>
 									<Route path="/" element={<HomePage />} />
 									<Route
@@ -25,6 +25,7 @@ function App() {
 										element={<CitiesPage />}
 									/>
 									<Route path="/map" element={<MapPage />} />
+
 									<Route path="*" element={<HomePage />} />
 								</Routes>
 							</Router>
