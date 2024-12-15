@@ -1,7 +1,6 @@
 import React from 'react';
 import { useDarkMode } from '../contexts/DarkModeContext';
 import Nav from '../components/Nav';
-import CustomInput from '../components/CustomInput';
 import CityItem from '../components/CityItem';
 import { useCities } from '../contexts/CitiesContext';
 import EmptyList from '../components/EmptyList';

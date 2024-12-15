@@ -1,11 +1,13 @@
 import React from 'react';
 import { useWeather } from '../contexts/WeatherContext';
 import { useCities } from '../contexts/CitiesContext';
+import { useLocation } from '../contexts/LocationContext';
 import WeatherIcon from './WeatherIcon';
+
 function Main() {
 	const { currentWeather, city } = useWeather();
+	const { location } = useLocation();
 	const { addFavCities, favCities, removeFavCities } = useCities();
-	const location = JSON.parse(localStorage.getItem('location'));
 	const cityData = {
 		lat: location?.lat,
 		lng: location?.lng,

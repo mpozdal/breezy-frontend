@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import { useLocation } from './LocationContext';
+import { useError } from '../contexts/ErrorContext';
 import {
 	fetchWeeklyInfo,
 	fetchWeatherForecast,
@@ -15,8 +16,8 @@ export const WeatherProvider = ({ children }) => {
 	const [weeklyInfo, setWeeklyInfo] = useState(null);
 	const [city, setCity] = useState(null);
 	const [currentWeather, setCurrentWeather] = useState(null);
-	const [error, setError] = useState(null);
 	const { location } = useLocation();
+	const { setError } = useError();
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
@@ -27,7 +28,7 @@ export const WeatherProvider = ({ children }) => {
 				fetchCurrentWeather();
 				fetchCity();
 			} catch (err) {
-				console.log(err);
+				setError(err);
 			} finally {
 				setIsLoading(false);
 			}
@@ -35,52 +36,45 @@ export const WeatherProvider = ({ children }) => {
 	}, [location]);
 
 	const fetchWeatherData = async () => {
-		const latitude = location.lat;
-		const longitude = location.lng;
-		if (latitude !== null && longitude !== null) {
+		if (location.lat !== null && location.lng !== null) {
 			try {
 				const response = await fetchWeatherForecast(location);
-				setWeatherData(response);
+				setWeatherData(response.data);
 			} catch (err) {
-				console.log('Error with fetch weather!' + err);
+				setError(err);
 			}
 		}
 	};
 	const fetchWeeklyWeather = async () => {
-		const { latitude, longitude } = location;
-		if (latitude !== null && longitude !== null) {
+		if (location.lat !== null && location.lng !== null) {
 			try {
 				const response = await fetchWeeklyInfo(location);
-				setWeeklyInfo(response);
+				setWeeklyInfo(response.data);
 			} catch (err) {
-				console.log('Error with fetch weather!' + err);
+				setError(err);
 			}
 		}
 	};
 	const fetchCurrentWeather = async () => {
-		const latitude = location.lat;
-		const longitude = location.lng;
-		if (latitude !== null && longitude !== null) {
+		if (location.lat !== null && location.lng !== null) {
 			try {
 				const response = await fetchCurrentInfo(location);
-				setCurrentWeather(response);
+				setCurrentWeather(response.data);
 			} catch (err) {
-				console.log('Error with fetch weather!' + err);
+				setError(err);
 			}
 		}
 	};
 
 	const fetchCity = async () => {
-		const latitude = location.lat;
-		const longitude = location.lng;
-		if (latitude !== null && longitude !== null) {
+		if (location.lat !== null && location.lng !== null) {
 			try {
 				const response = await fetchCityName(location);
-				const code = response?.plus_code?.compound_code;
+				const code = response.data.plus_code.compound_code;
 				const result = code.replace(/^[^\s]+\s/, '');
 				setCity(result);
 			} catch (err) {
-				console.log('Error with fetch weather!' + err);
+				setError(err);
 			}
 		}
 	};
@@ -89,7 +83,6 @@ export const WeatherProvider = ({ children }) => {
 		<WeatherContext.Provider
 			value={{
 				weatherData,
-				error,
 				weeklyInfo,
 				currentWeather,
 				city,

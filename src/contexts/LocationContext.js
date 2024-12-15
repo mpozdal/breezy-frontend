@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
-
+import { fetchCoords } from '../backend';
 export const LocationContext = createContext();
 
 export const useLocation = () => useContext(LocationContext);
@@ -16,18 +16,34 @@ export const LocationProvider = ({ children }) => {
 		getLocation();
 	}, []);
 
-	const handleSetLocation = (location) => {
+	const handleSetLocationFromFav = (data) => {
 		setLocation({
-			lat: location.latitude,
-			lng: location.longitude,
+			lat: data.lat,
+			lng: data.lng,
 		});
+
 		localStorage.setItem(
 			'location',
 			JSON.stringify({
-				lat: location.latitude,
-				lng: location.longitude,
+				lat: data.lat,
+				lng: data.lng,
 			})
 		);
+	};
+
+	const handleSetLocation = async (place_id) => {
+		try {
+			const response = await fetchCoords(place_id);
+			console.log(response);
+			const data = {
+				lat: response.data.lat,
+				lng: response.data.lng,
+			};
+			setLocation(data);
+			localStorage.setItem('location', JSON.stringify(data));
+		} catch (err) {
+			setError(err);
+		}
 	};
 
 	const getLocation = () => {
@@ -38,7 +54,14 @@ export const LocationProvider = ({ children }) => {
 						lat: position.coords.latitude,
 						lng: position.coords.longitude,
 					});
-					handleSetLocation(position.coords);
+
+					localStorage.setItem(
+						'location',
+						JSON.stringify({
+							lat: position.coords.latitude,
+							lng: position.coords.longitude,
+						})
+					);
 				},
 				(err) => {
 					setError(err.message);
@@ -67,6 +90,7 @@ export const LocationProvider = ({ children }) => {
 				setCity,
 				getLocation,
 				handleSetLocation,
+				handleSetLocationFromFav,
 			}}
 		>
 			{children}

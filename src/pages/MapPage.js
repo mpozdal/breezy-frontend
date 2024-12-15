@@ -1,7 +1,6 @@
 import React from 'react';
 import { useDarkMode } from '../contexts/DarkModeContext';
 import Nav from '../components/Nav';
-import EmptyList from '../components/EmptyList';
 
 function MapPage() {
 	const { darkMode } = useDarkMode();

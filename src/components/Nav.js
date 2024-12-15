@@ -1,9 +1,10 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { useDarkMode } from '../contexts/DarkModeContext';
 import Toggle from 'react-toggle';
 import 'react-toggle/style.css';
 import '../toogle.css';
-import { NavLink } from 'react-router-dom';
+
 function Nav() {
 	const { darkMode, toggleDarkMode } = useDarkMode();
 	return (

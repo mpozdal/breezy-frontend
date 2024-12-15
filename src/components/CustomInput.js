@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { useLocation } from '../contexts/LocationContext';
 import { useCities } from '../contexts/CitiesContext';
-import { fetchCoords, fetchCity, fetchCityName } from '../backend';
+import { useError } from '../contexts/ErrorContext';
+import { fetchCity } from '../backend';
 function CustomInput({ placeholder, fav }) {
 	const { addFavCities } = useCities();
-	const { setLocation, getLocation, handleSetLocation } = useLocation();
+	const { getLocation, handleSetLocation } = useLocation();
+	const { setError } = useError();
 	const [input, setInput] = useState('');
-	const [selectedCity, setSelectedCity] = useState(null);
 	const [cities, setCities] = useState([]);
 
 	const clearInput = () => {
@@ -15,19 +16,8 @@ function CustomInput({ placeholder, fav }) {
 	};
 
 	const handleSelectCity = async (item) => {
-		setSelectedCity(item);
-		try {
-			const response = await fetchCoords(item);
-			const location = {
-				latitude: response.lat,
-				longitude: response.lng,
-			};
-			handleSetLocation(location);
-		} catch (error) {
-			console.error('Błąd przy pobieraniu coords:', error);
-		} finally {
-			clearInput();
-		}
+		await handleSetLocation(item.place_id);
+		clearInput();
 	};
 	const handleInputChange = async (e) => {
 		const value = e.target.value;
@@ -36,20 +26,16 @@ function CustomInput({ placeholder, fav }) {
 		if (value) {
 			try {
 				const response = await fetchCity(value);
-				setCities(response);
+				setCities(response.data.predictions);
 			} catch (error) {
-				console.error('Błąd przy pobieraniu miast:', error);
+				setError(error);
 			}
 		} else {
 			clearInput();
 		}
 	};
 	const addFavCity = (item) => {
-		const cityData = {
-			placeId: item?.place_id,
-			name: item?.description,
-		};
-		addFavCities(cityData);
+		addFavCities(item);
 		clearInput();
 	};
 	return (
@@ -63,8 +49,11 @@ function CustomInput({ placeholder, fav }) {
 					placeholder={placeholder}
 				/>
 				{!fav && (
-					<button className="p-4" onClick={getLocation}>
-						<i className="fa-solid fa-crosshairs  text-light-alt-text dark:text-dark-alt-text "></i>
+					<button
+						className="p-4 hover:text-dark-text text-light-alt-text dark:text-dark-alt-text"
+						onClick={getLocation}
+					>
+						<i className="fa-solid fa-crosshairs"></i>
 					</button>
 				)}
 			</div>

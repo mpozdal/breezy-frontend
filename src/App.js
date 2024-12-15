@@ -6,28 +6,33 @@ import MapPage from './pages/MapPage';
 import { LocationProvider } from './contexts/LocationContext';
 import { WeatherProvider } from './contexts/WeatherContext';
 import { CitiesProvider } from './contexts/CitiesContext';
+import { ErrorProvider } from './contexts/ErrorContext';
+import ErrorStatus from './components/ErrorStatus';
 
 function App() {
 	return (
-		<LocationProvider>
-			<WeatherProvider>
-				<CitiesProvider>
-					<DarkModeProvider>
-						<Router>
-							<Routes>
-								<Route path="/" element={<HomePage />} />
-								<Route
-									path="/cities"
-									element={<CitiesPage />}
-								/>
-								<Route path="/map" element={<MapPage />} />
-								<Route path="*" element={<HomePage />} />
-							</Routes>
-						</Router>
-					</DarkModeProvider>
-				</CitiesProvider>
-			</WeatherProvider>
-		</LocationProvider>
+		<ErrorProvider>
+			<LocationProvider>
+				<WeatherProvider>
+					<CitiesProvider>
+						<DarkModeProvider>
+							<Router>
+								<ErrorStatus />
+								<Routes>
+									<Route path="/" element={<HomePage />} />
+									<Route
+										path="/cities"
+										element={<CitiesPage />}
+									/>
+									<Route path="/map" element={<MapPage />} />
+									<Route path="*" element={<HomePage />} />
+								</Routes>
+							</Router>
+						</DarkModeProvider>
+					</CitiesProvider>
+				</WeatherProvider>
+			</LocationProvider>
+		</ErrorProvider>
 	);
 }
 

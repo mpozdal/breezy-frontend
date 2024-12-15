@@ -1,16 +1,22 @@
 import axios from 'axios';
 
-export const fetchCoords = async (item) => {
+const deafultError = (code, text) => {
+	return new Error(`HTTP error! status: ${code}, message: ${text}`);
+};
+
+export const fetchCoords = async (placeId) => {
 	try {
 		const response = await axios.get('/api/city/coords', {
-			params: { input: item?.place_id },
+			params: { input: placeId },
 		});
 		if (response.status !== 200) {
-			throw new Error(response);
+			throw deafultError(response.status, response.statusText);
 		}
-		return response.data;
-	} catch (error) {
-		throw error;
+		return response;
+	} catch (err) {
+		throw new Error(
+			err.message || 'Something went wrong while fetching data'
+		);
 	}
 };
 
@@ -20,11 +26,13 @@ export const fetchCity = async (input) => {
 			params: { input: input },
 		});
 		if (response.status !== 200) {
-			throw new Error(response);
+			throw deafultError(response.status, response.statusText);
 		}
-		return response?.data?.predictions;
-	} catch (error) {
-		throw error;
+		return response;
+	} catch (err) {
+		throw new Error(
+			err.message || 'Something went wrong while fetching data'
+		);
 	}
 };
 export const fetchWeatherForecast = async (location) => {
@@ -35,10 +43,14 @@ export const fetchWeatherForecast = async (location) => {
 			const response = await axios.get('/api/weather', {
 				params: { latitude, longitude },
 			});
-
-			return response.data;
+			if (response.status !== 200) {
+				throw deafultError(response.status, response.statusText);
+			}
+			return response;
 		} catch (err) {
-			console.log('Error with fetch weather!' + err);
+			throw new Error(
+				err.message || 'Something went wrong while fetching data'
+			);
 		}
 	}
 };
@@ -51,9 +63,14 @@ export const fetchWeeklyInfo = async (location) => {
 				params: { latitude, longitude },
 			});
 
-			return response.data;
+			if (response.status !== 200) {
+				throw deafultError(response.status, response.statusText);
+			}
+			return response;
 		} catch (err) {
-			console.log('Error with fetch weekly info!' + err);
+			throw new Error(
+				err.message || 'Something went wrong while fetching data'
+			);
 		}
 	}
 };
@@ -65,9 +82,14 @@ export const fetchCurrentInfo = async (location) => {
 			const response = await axios.get('/api/weather/current', {
 				params: { latitude, longitude },
 			});
-			return response.data;
+			if (response.status !== 200) {
+				throw deafultError(response.status, response.statusText);
+			}
+			return response;
 		} catch (err) {
-			console.log('Error with fetch current info!' + err);
+			throw new Error(
+				err.message || 'Something went wrong while fetching data'
+			);
 		}
 	}
 };
@@ -80,9 +102,15 @@ export const fetchCityName = async (location) => {
 			const response = await axios.get('/api/city/name', {
 				params: { latitude, longitude },
 			});
-			return response.data;
+			if (response.status !== 200) {
+				throw deafultError(response.status, response.statusText);
+			}
+			return response;
 		} catch (err) {
 			console.log('Error with fetch city name!' + err);
+			throw new Error(
+				err.message || 'Something went wrong while fetching data'
+			);
 		}
 	}
 };

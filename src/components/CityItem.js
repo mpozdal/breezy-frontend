@@ -4,12 +4,9 @@ import { useLocation } from '../contexts/LocationContext';
 import { useNavigate } from 'react-router';
 function CityItem({ data }) {
 	const { removeFavCities } = useCities();
-	const { handleSetLocation } = useLocation();
+	const { handleSetLocationFromFav } = useLocation();
 	let navigate = useNavigate();
-	const coords = {
-		latitude: data?.lat,
-		longitude: data?.lng,
-	};
+
 	return (
 		<div
 			className="h-[100px] flex flex-row items-center justify-between bg-light-panels dark:bg-dark-panels text-light-text 
@@ -20,7 +17,7 @@ function CityItem({ data }) {
 			<button
 				className="w-full h-full text-start"
 				onClick={() => {
-					handleSetLocation(coords);
+					handleSetLocationFromFav(data);
 					navigate('/');
 				}}
 			>
