@@ -8,7 +8,9 @@ function EmptyList() {
             dark:text-dark-alt-text"
 		>
 			<i className="fa-solid fa-list text-[5rem]"></i>
-			<h3 className="text-3xl font-bold">ADD YOUR FAV CITIES</h3>
+			<h3 className="text-3xl font-bold text-center">
+				ADD YOUR FAV CITIES
+			</h3>
 		</div>
 	);
 }

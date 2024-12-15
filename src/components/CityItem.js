@@ -9,7 +9,7 @@ function CityItem({ data }) {
 
 	return (
 		<div
-			className="h-[100px] flex flex-row items-center justify-between bg-light-panels dark:bg-dark-panels text-light-text 
+			className="min-h-[100px] flex flex-row items-center justify-between bg-light-panels dark:bg-dark-panels text-light-text 
                 cursor-pointer 
 				border-b-[1px] border-b-dark-alt-text dark:border-b-dark-background
             dark:text-dark-text hover:transition-all p-4 hover:bg-dark-panels hover:dark:bg-light-panels hover:text-dark-text hover:dark:text-light-text"
@@ -21,7 +21,7 @@ function CityItem({ data }) {
 					navigate('/');
 				}}
 			>
-				<h3 className="text-3xl font-bold ">{data?.city}</h3>
+				<h3 className="text-xl md:text-3xl font-bold ">{data?.city}</h3>
 			</button>
 			<button
 				onClick={() => {

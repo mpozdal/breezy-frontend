@@ -13,7 +13,7 @@ function Main() {
 		lng: location?.lng,
 		city: city,
 	};
-	const checkFav = () => {
+	const CheckFav = () => {
 		const exists = favCities.some((city) => city.city === cityData.city);
 		if (exists) {
 			return <i className="fa-solid fa-star text-2xl "></i>;
@@ -22,13 +22,13 @@ function Main() {
 	};
 
 	return (
-		<div className="flex flex-row  w-full text-light-text dark:text-white relative">
-			<div className="text-3xl w-2/3 font-bold  flex flex-col h-full   justify-around">
-				<h3 className="flex items-center ">
+		<div className="order-1 md:order-2 flex flex-row  w-full text-light-text dark:text-white relative">
+			<div className="text-xl md:text-3xl w-2/3 font-bold  flex flex-col h-full gap-5 md:gap-0  justify-around">
+				<h3 className="flex items-start ">
 					{city || 'Unkown city, Country'}
 					{city && (
 						<button
-							className=" flex justify-start item-center p-4"
+							className="flex justify-center absolute right-0 top-0 md:top-2"
 							onClick={() => {
 								if (
 									favCities.some(
@@ -39,11 +39,11 @@ function Main() {
 								} else addFavCities(cityData);
 							}}
 						>
-							{checkFav()}
+							<CheckFav />
 						</button>
 					)}
 				</h3>
-				<div className="text-8xl font-bold ">
+				<div className="text-6xl md:text-8xl font-bold ">
 					{currentWeather?.current?.temperature_2m || 0}°
 				</div>
 			</div>

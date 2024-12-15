@@ -39,7 +39,7 @@ function CustomInput({ placeholder, fav }) {
 		clearInput();
 	};
 	return (
-		<div className="relative">
+		<div className="order-0 md:col-span-2 relative">
 			<div className=" flex justify-center items-center bg-light-panels dark:bg-dark-panels border-light-text border-b-2">
 				<input
 					value={input}

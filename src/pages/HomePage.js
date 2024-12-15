@@ -12,7 +12,7 @@ function HomePage() {
 
 	return (
 		<div className={`${darkMode ? 'dark' : ''} `}>
-			<div className="flex h-screen bg-light-background dark:bg-dark-background text-white p-4">
+			<div className="flex h-[100dvh] bg-light-background dark:bg-dark-background text-white p-4">
 				<Nav />
 
 				{isLoading || isGettingLocation ? (
@@ -26,9 +26,10 @@ function HomePage() {
 						</div>
 					</div>
 				) : (
-					<div className="grid w-full grid-cols-[2fr_1fr] grid-rows-[50px_2fr_1fr] h-full gap-4 ml-4">
+					<div className="overflow-y-auto grid w-full grid-cols-1 md:grid-cols-[3fr_4fr] md:grid-rows-[50px_1fr_1fr] h-full gap-4 ml-4">
 						<CustomInput placeholder="Search for cities" />
 						<Forecast />
+
 						<Main />
 						<ExtraInfo />
 					</div>

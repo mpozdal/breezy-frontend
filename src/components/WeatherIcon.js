@@ -2,7 +2,7 @@ import React from 'react';
 
 const getWeatherIcon = (code) => {
 	if (code === 0) return '/assets/sunny.png';
-	if ([1, 2, 3].includes(code)) return '/assets/cloudy2.png'; // Częściowe zachmurzenie
+	if ([1, 2, 3].includes(code)) return '/assets/cloudy.png'; // Częściowe zachmurzenie
 	if ([45, 48].includes(code)) return '/assets/fog.png'; // Mgła
 	if ([51, 53, 55, 61, 63, 65, 80, 81, 82].includes(code))
 		return '/assets/rain.png'; // Deszcz

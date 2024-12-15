@@ -42,7 +42,7 @@ function MapPage() {
 	});
 	return (
 		<div className={`${darkMode ? 'dark' : ''} `}>
-			<div className="flex h-screen bg-light-background dark:bg-dark-background text-white p-4">
+			<div className="flex h-[100dvh] bg-light-background dark:bg-dark-background text-white p-4">
 				<Nav />
 
 				<div className="w-full ml-4">
