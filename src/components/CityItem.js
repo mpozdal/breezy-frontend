@@ -1,32 +1,39 @@
 import React from 'react';
 import { useCities } from '../contexts/CitiesContext';
-function CityItem({ data, empty }) {
+import { useLocation } from '../contexts/LocationContext';
+import { useNavigate } from 'react-router';
+function CityItem({ data }) {
 	const { removeFavCities } = useCities();
+	const { handleSetLocation } = useLocation();
+	let navigate = useNavigate();
+	const coords = {
+		latitude: data?.lat,
+		longitude: data?.lng,
+	};
 	return (
 		<div
-			class="h-[100px] flex flex-row items-center justify-between bg-light-panels dark:bg-dark-panels text-light-text 
+			className="h-[100px] flex flex-row items-center justify-between bg-light-panels dark:bg-dark-panels text-light-text 
                 cursor-pointer 
 				border-b-[1px] border-b-dark-alt-text dark:border-none
             dark:text-dark-text hover:transition-all p-4 hover:bg-dark-panels hover:dark:bg-light-panels hover:text-dark-text hover:dark:text-light-text"
 		>
-			<div className="flex flex-row items-center gap-8">
-				<i className="fa-solid fa-sun text-6xl"></i>
-				<div>
-					<h3 className="text-3xl font-medium ">{data}</h3>
-					{/* <h3
-						className="text-md font-normal 
-                     "
-					>
-						10:23
-					</h3> */}
-				</div>
-			</div>
-			<div className="flex flex-row items-center gap-4">
-				{/* <h3 className="text-6xl font-bold">32°</h3> */}
-				<button onClick={() => removeFavCities(data)}>
-					<i class="fa-solid fa-x text-xl"></i>
-				</button>
-			</div>
+			<button
+				className="w-full h-full text-start"
+				onClick={() => {
+					handleSetLocation(coords);
+					navigate('/');
+				}}
+			>
+				<h3 className="text-3xl font-medium ">{data?.city}</h3>
+			</button>
+			<button
+				onClick={() => {
+					removeFavCities(data);
+				}}
+				className="w-[50px]"
+			>
+				<i className="fa-solid fa-trash text-xl"></i>
+			</button>
 		</div>
 	);
 }

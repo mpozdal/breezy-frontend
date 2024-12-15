@@ -9,10 +9,10 @@ export const CitiesProvider = ({ children }) => {
 		const savedItems = localStorage.getItem('cities');
 		return savedItems ? JSON.parse(savedItems) : [];
 	});
-	useEffect(() => {}, [favCities]);
 
 	const addFavCities = (item) => {
-		if (!favCities.includes(item)) {
+		const exists = favCities.some((city) => city.city === item.city);
+		if (!exists) {
 			const updatedItems = [...favCities, item];
 			setFavCities(updatedItems);
 			updateLocalStorage(updatedItems);
@@ -26,12 +26,11 @@ export const CitiesProvider = ({ children }) => {
 	};
 	const removeFavCities = (item) => {
 		const temp = favCities;
-		const idx = temp.indexOf(item);
-		if (idx > -1) {
-			temp.splice(idx, 1);
-			updateLocalStorage(temp);
-			setFavCities(temp);
-		}
+		const updatedCities = temp.filter((city) => city.city !== item.city);
+
+		updateLocalStorage(updatedCities);
+		setFavCities(updatedCities);
+
 		refreshCities();
 	};
 

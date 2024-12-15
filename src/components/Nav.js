@@ -10,11 +10,11 @@ function Nav() {
 		<div className="w-32 bg-light-panels dark:bg-dark-panels  flex flex-col justify-between items-center py-4">
 			<span className=" text-light-alt-text dark:text-dark-text font-bold text-2xl">
 				<NavLink to="/" className="flex flex-col items-center">
-					<i class="fa-solid fa-wind"></i>Breezy
+					<i className="fa-solid fa-wind"></i>Breezy
 				</NavLink>
 			</span>
 			<ul className="text-center text-light-alt-text dark:text-dark-alt-text">
-				<li class="mb-4 ">
+				<li className="mb-4 ">
 					<NavLink
 						to="/"
 						className={({ isActive }) =>
@@ -23,10 +23,10 @@ function Nav() {
 								: 'flex flex-col'
 						}
 					>
-						<i class="fa-solid fa-cloud text-2xl"></i> Weather
+						<i className="fa-solid fa-cloud text-2xl"></i> Weather
 					</NavLink>
 				</li>
-				<li class="mb-4 ">
+				<li className="mb-4 ">
 					<NavLink
 						to="/cities"
 						className={({ isActive }) =>
@@ -35,10 +35,10 @@ function Nav() {
 								: 'flex flex-col'
 						}
 					>
-						<i class="fa-solid fa-city text-2xl"></i> Cities
+						<i className="fa-solid fa-city text-2xl"></i> Cities
 					</NavLink>
 				</li>
-				<li class="mb-4 ">
+				<li className="mb-4 ">
 					{' '}
 					<NavLink
 						to="/map"
@@ -48,7 +48,7 @@ function Nav() {
 								: 'flex flex-col'
 						}
 					>
-						<i class="fa-solid fa-map text-2xl"></i>Map
+						<i className="fa-solid fa-map text-2xl"></i>Map
 					</NavLink>
 				</li>
 			</ul>
