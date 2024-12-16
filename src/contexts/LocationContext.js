@@ -88,7 +88,6 @@ export const LocationProvider = ({ children }) => {
 						);
 					},
 					(err) => {
-						err.code !== 1 && setError(err);
 						setLocation({
 							lat: 40.73061,
 							lng: -73.935242,

@@ -16,9 +16,10 @@ function HomePage() {
 				<Nav />
 
 				{isLoading || isGettingLocation ? (
-					<div className="grid w-full grid-cols-1 grid-rows-[50px_1fr] h-full gap-2 ml-2 md:gap-4 md:ml-4">
+					<div className="grid w-full grid-cols-1 md:grid-cols-[3fr_4fr] grid-rows-[50px_1fr] h-full gap-2 ml-2 md:gap-4 md:ml-4">
 						<CustomInput placeholder="Search for cities" />
-						<div className="flex justify-center items-center text-8xl">
+
+						<div className="flex col-span-2 justify-center order-3 items-center text-8xl">
 							<ThreeDot
 								color={!darkMode ? '#0b131e' : '#F8FAFC'}
 								size="large"
