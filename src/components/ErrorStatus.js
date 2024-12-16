@@ -1,14 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useError } from '../contexts/ErrorContext';
 function ErrorStatus() {
 	const { error } = useError();
 	const [isVisible, setIsVisible] = useState(true);
 
 	return (
-		error?.message &&
+		error &&
 		isVisible && (
 			<div className=" bg-red-500 p-4 flex justify-between items-center text-white text-sm w-full font-bold z-10 absolute bottom-0">
-				ERROR: {error?.message}
+				ERROR: {error.message}
 				<button
 					onClick={() => {
 						setIsVisible(false);

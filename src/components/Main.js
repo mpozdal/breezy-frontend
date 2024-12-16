@@ -51,7 +51,7 @@ function Main() {
 						</button>
 					)}
 				</h3>
-				<div className="text-6xl md:text-8xl font-bold ">
+				<div className="text-6xl sm:text-6xl lg:text-8xl font-bold ">
 					{currentWeather?.current?.temperature_2m || 0}°
 				</div>
 			</div>

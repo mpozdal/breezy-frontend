@@ -13,11 +13,7 @@ const getWeatherIcon = (code) => {
 
 const WeatherIcon = ({ weatherCode }) => {
 	const iconPath = getWeatherIcon(weatherCode);
-	return (
-		<div>
-			<img src={iconPath} alt={weatherCode} className="" />
-		</div>
-	);
+	return <img src={iconPath} alt={weatherCode} className="w-1/2 md:w-full" />;
 };
 
 export default WeatherIcon;

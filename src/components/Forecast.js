@@ -12,8 +12,10 @@ function Forecast() {
 		<div
 			className="order-2 md:order-1 bg-light-panels dark:bg-dark-panels text-light-text dark:text-white 
 			p-4  
+			 md:bg-transparent
 		 	row-span-3  w-full h-full grid grid-rows-[30px_1fr_1fr_1fr_1fr_1fr_1fr_1fr] md:grid-rows-[50px_1fr_1fr_1fr_1fr_1fr_1fr_1fr] relative"
 		>
+			<ErrorStatus />
 			<div className="flex flex-row w-full ">
 				<h3 className="text-lg font-medium ">7-DAY FORECAST</h3>
 			</div>
@@ -27,7 +29,10 @@ function Forecast() {
 							{day?.time}
 						</div>
 
-						<div className="row-span-3 md:row-span-1 text-center  w-full flex justify-left">
+						<div
+							className="row-span-3 md:row-span-1 text-center  w-full h-full flex 
+						items-center md:items-end justify-center md:justify-left"
+						>
 							<WeatherIcon weatherCode={day?.weathercode} />
 						</div>
 
@@ -52,7 +57,6 @@ function Forecast() {
 					Problem with fetching data
 				</div>
 			)}
-			<ErrorStatus />
 		</div>
 	);
 }

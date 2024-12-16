@@ -1,4 +1,10 @@
-import React, { createContext, useState, useEffect, useContext } from 'react';
+import React, {
+	createContext,
+	useState,
+	useEffect,
+	useContext,
+	useCallback,
+} from 'react';
 import { useLocation } from './LocationContext';
 import { useError } from './ErrorContext';
 import {
@@ -19,21 +25,6 @@ export const WeatherProvider = ({ children }) => {
 	const [currentWeather, setCurrentWeather] = useState(null);
 	const { location } = useLocation();
 	const { setError } = useError();
-
-	useEffect(() => {
-		if (location?.lng && location?.lat) {
-			try {
-				fetchWeatherData();
-				fetchWeeklyWeather();
-				fetchCurrentWeather();
-				fetchCity();
-			} catch (err) {
-				setError(err);
-			} finally {
-				setIsLoading(false);
-			}
-		}
-	}, [location]);
 
 	const fetchWeatherData = async () => {
 		if (location.lat !== null && location.lng !== null) {
@@ -79,6 +70,23 @@ export const WeatherProvider = ({ children }) => {
 		}
 	};
 
+	useEffect(() => {
+		if (location.lat !== null && location.lng !== null) {
+			try {
+				fetchWeatherData();
+
+				fetchWeeklyWeather();
+				fetchCurrentWeather();
+				fetchCity();
+			} catch (err) {
+				setError(err);
+			} finally {
+				setTimeout(() => {
+					setIsLoading(false);
+				}, 300);
+			}
+		} // Opóźnienie 100ms, możesz dostosować wartość
+	}, [location]);
 	return (
 		<WeatherContext.Provider
 			value={{

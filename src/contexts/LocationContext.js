@@ -12,7 +12,7 @@ export const LocationProvider = ({ children }) => {
 		lng: null,
 	});
 	const [city, setCity] = useState(null);
-	const [error, setError] = useState(null);
+	const { setError, error } = useError();
 
 	useEffect(() => {
 		if (!JSON.parse(localStorage.getItem('location'))) {
@@ -27,24 +27,32 @@ export const LocationProvider = ({ children }) => {
 	}, []);
 
 	const handleSetLocationFromFav = (data) => {
-		setLocation({
-			lat: data.lat,
-			lng: data.lng,
-		});
-
-		localStorage.setItem(
-			'location',
-			JSON.stringify({
+		setIsGettingLocation(true);
+		try {
+			setLocation({
 				lat: data.lat,
 				lng: data.lng,
-			})
-		);
+			});
+
+			localStorage.setItem(
+				'location',
+				JSON.stringify({
+					lat: data.lat,
+					lng: data.lng,
+				})
+			);
+		} catch (err) {
+		} finally {
+			setTimeout(() => {
+				setIsGettingLocation(false);
+			}, 300);
+		}
 	};
 
 	const handleSetLocation = async (place_id) => {
+		setIsGettingLocation(true);
 		try {
 			const response = await fetchCoords(place_id);
-			console.log(response);
 			const data = {
 				lat: response.data.lat,
 				lng: response.data.lng,
@@ -53,6 +61,10 @@ export const LocationProvider = ({ children }) => {
 			localStorage.setItem('location', JSON.stringify(data));
 		} catch (err) {
 			setError(err);
+		} finally {
+			setTimeout(() => {
+				setIsGettingLocation(false);
+			}, 300);
 		}
 	};
 
@@ -76,7 +88,7 @@ export const LocationProvider = ({ children }) => {
 						);
 					},
 					(err) => {
-						setError(err.message);
+						err.code !== 1 && setError(err);
 						setLocation({
 							lat: 40.73061,
 							lng: -73.935242,
@@ -93,7 +105,9 @@ export const LocationProvider = ({ children }) => {
 		} catch (err) {
 			setError(err);
 		} finally {
-			setIsGettingLocation(false);
+			setTimeout(() => {
+				setIsGettingLocation(false);
+			}, 300);
 		}
 	};
 
