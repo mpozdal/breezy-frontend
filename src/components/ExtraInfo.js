@@ -31,7 +31,7 @@ function ExtraInfo() {
 				</div>
 				<div className="text-right flex flex-col">
 					<span className="text-light-alt-text dark:text-dark-alt-text">
-						Sun activity
+						Avg sun activity
 					</span>
 					<span className="text-xl md:text-3xl">
 						{(weeklyInfo?.avg_sunshine_time / 3600).toFixed(2)}h

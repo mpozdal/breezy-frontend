@@ -12,15 +12,15 @@ function Forecast() {
 		<div
 			className="order-2 md:order-1 bg-light-panels dark:bg-dark-panels text-light-text dark:text-white 
 			p-4  
-		 	row-span-3  w-full h-full grid grid-rows-[30px_1fr_1fr_1fr_1fr_1fr_1fr_1fr] md:grid-rows-[1fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr] relative"
+		 	row-span-3  w-full h-full grid grid-rows-[30px_1fr_1fr_1fr_1fr_1fr_1fr_1fr] md:grid-rows-[50px_1fr_1fr_1fr_1fr_1fr_1fr_1fr] relative"
 		>
-			<div className="flex flex-row w-full justify-between items-center">
+			<div className="flex flex-row w-full ">
 				<h3 className="text-lg font-medium ">7-DAY FORECAST</h3>
 			</div>
 			{weatherData !== null ? (
 				weatherData?.map((day, index) => (
 					<div
-						className=" h-[120px] md:h-full w-full grid grid-cols-[2fr_1fr] grid-rows-3 md:grid-rows-1 md:grid-cols-[1fr_40px_2fr_1fr] md:gap-4 justify-between items-center text-left"
+						className=" h-[120px] md:h-full w-full grid grid-cols-[2fr_1fr] grid-rows-3 md:grid-rows-1 md:grid-cols-[1fr_40px_2fr_1fr] md:gap-4 justify-between items-end text-left"
 						key={index}
 					>
 						<div className="text-sm font-medium text-left  text-light-alt-text dark:text-dark-alt-text">

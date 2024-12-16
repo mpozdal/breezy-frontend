@@ -53,7 +53,7 @@ function CustomInput({ placeholder, fav }) {
 						className="p-4 hover:text-light-text hover:dark:text-dark-text text-light-alt-text dark:text-dark-alt-text"
 						onClick={getLocation}
 					>
-						<i className="fa-solid fa-crosshairs text-xl"></i>
+						<i className="fa-solid fa-crosshairs text-2xl"></i>
 					</button>
 				)}
 			</div>

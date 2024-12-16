@@ -3,7 +3,7 @@ import { useWeather } from '../contexts/WeatherContext';
 import { useCities } from '../contexts/CitiesContext';
 import { useLocation } from '../contexts/LocationContext';
 import WeatherIcon from './WeatherIcon';
-
+import { Tooltip } from 'react-tooltip';
 function Main() {
 	const { currentWeather, city } = useWeather();
 	const { location } = useLocation();
@@ -16,9 +16,17 @@ function Main() {
 	const CheckFav = () => {
 		const exists = favCities.some((city) => city.city === cityData.city);
 		if (exists) {
-			return <i className="fa-solid fa-star text-2xl "></i>;
+			return (
+				<a data-tooltip-id="my-tooltip" data-tooltip-content="Remove">
+					<i className="fa-solid fa-star text-2xl "></i>
+				</a>
+			);
 		}
-		return <i className="fa-regular fa-star text-2xl "></i>;
+		return (
+			<a data-tooltip-id="my-tooltip" data-tooltip-content="Save">
+				<i className="fa-regular fa-star text-2xl "></i>
+			</a>
+		);
 	};
 
 	return (
@@ -28,7 +36,7 @@ function Main() {
 					{city || 'Unkown city, Country'}
 					{city && (
 						<button
-							className="flex justify-center absolute right-0 top-0 md:top-2 hover:text-light-alt-text dark:hover:text-dark-alt-text"
+							className="flex justify-center absolute right-4 top-0 md:top-2 hover:text-light-alt-text dark:hover:text-dark-alt-text"
 							onClick={() => {
 								if (
 									favCities.some(
