@@ -3,10 +3,10 @@ import axios from 'axios';
 const deafultError = (code, text) => {
 	return new Error(`HTTP error! status: ${code}, message: ${text}`);
 };
-
+const BACKEND_URL = 'https://breezy-backend.onrender.com';
 export const fetchCoords = async (placeId) => {
 	try {
-		const response = await axios.get('/api/city/coords', {
+		const response = await axios.get(BACKEND_URL + '/api/city/coords', {
 			params: { input: placeId },
 		});
 		if (response.status !== 200) {
@@ -22,7 +22,7 @@ export const fetchCoords = async (placeId) => {
 
 export const fetchCity = async (input) => {
 	try {
-		const response = await axios.get('/api/city', {
+		const response = await axios.get(BACKEND_URL + '/api/city', {
 			params: { input: input },
 		});
 		if (response.status !== 200) {
@@ -40,7 +40,7 @@ export const fetchWeatherForecast = async (location) => {
 	const longitude = location.lng;
 	if (latitude !== null && longitude !== null) {
 		try {
-			const response = await axios.get('/api/weather', {
+			const response = await axios.get(BACKEND_URL + '/api/weather', {
 				params: { latitude, longitude },
 			});
 			if (response.status !== 200) {
@@ -61,9 +61,12 @@ export const fetchWeeklyInfo = async (location) => {
 	const longitude = location?.lng;
 	if (latitude !== null && longitude !== null) {
 		try {
-			const response = await axios.get('/api/weather/weeklyInfo', {
-				params: { latitude, longitude },
-			});
+			const response = await axios.get(
+				BACKEND_URL + '/api/weather/weeklyInfo',
+				{
+					params: { latitude, longitude },
+				}
+			);
 
 			if (response.status !== 200) {
 				throw deafultError(response.status, response.statusText);
@@ -83,9 +86,12 @@ export const fetchCurrentInfo = async (location) => {
 	const longitude = location?.lng;
 	if (latitude !== null && longitude !== null) {
 		try {
-			const response = await axios.get('/api/weather/current', {
-				params: { latitude, longitude },
-			});
+			const response = await axios.get(
+				BACKEND_URL + '/api/weather/current',
+				{
+					params: { latitude, longitude },
+				}
+			);
 			if (response.status !== 200) {
 				throw deafultError(response.status, response.statusText);
 			}
@@ -105,7 +111,7 @@ export const fetchCityName = async (location) => {
 	const longitude = location?.lng;
 	if (latitude !== null && longitude !== null) {
 		try {
-			const response = await axios.get('/api/city/name', {
+			const response = await axios.get(BACKEND_URL + '/api/city/name', {
 				params: { latitude, longitude },
 			});
 			if (response.status !== 200) {
