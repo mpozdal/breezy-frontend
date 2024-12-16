@@ -19,8 +19,8 @@ function CustomInput({ placeholder, fav }) {
 	};
 
 	const handleSelectCity = async (item) => {
-		await handleSetLocation(item.place_id);
 		clearInput();
+		await handleSetLocation(item.place_id);
 	};
 	const handleInputChange = async (e) => {
 		const value = e.target.value;
