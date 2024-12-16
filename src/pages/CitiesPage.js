@@ -9,7 +9,7 @@ function CitiesPage() {
 	const { darkMode } = useDarkMode();
 	return (
 		<div className={`${darkMode ? 'dark' : ''} `}>
-			<div className="flex h-[100dvh] bg-light-background dark:bg-dark-background text-white gap-2 md:gap-4 ">
+			<div className="flex h-[100dvh] bg-light-background dark:bg-dark-background text-white p-2 md:p-4 ">
 				<Nav />
 
 				<div className=" w-full h-full gap-2 ml-2 md:gap-4 md:ml-4 ">
