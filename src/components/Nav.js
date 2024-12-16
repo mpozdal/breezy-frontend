@@ -32,7 +32,7 @@ function Nav() {
 						to="/cities"
 						className={({ isActive }) =>
 							isActive
-								? 'flex flex-col font-bold text-light-text dark:text-dark-text'
+								? 'flex flex-col font-bold text-light-text dark:text-dark-alt-text'
 								: 'flex flex-col'
 						}
 					>
@@ -45,7 +45,7 @@ function Nav() {
 						to="/map"
 						className={({ isActive }) =>
 							isActive
-								? 'flex flex-col font-bold text-light-text dark:text-dark-text'
+								? 'flex flex-col font-bold text-light-text dark:text-dark-alt-text'
 								: 'flex flex-col'
 						}
 					>
